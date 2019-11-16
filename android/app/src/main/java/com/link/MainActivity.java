@@ -7,6 +7,9 @@ import androidx.annotation.Nullable;
 
 import com.facebook.react.ReactActivity;
 import com.facebook.react.ReactActivityDelegate;
+import com.facebook.react.ReactActivityDelegate;
+import com.facebook.react.ReactRootView;
+import com.swmansion.gesturehandler.react.RNGestureHandlerEnabledRootView;
 
 public class MainActivity extends ReactActivity {
 
@@ -18,6 +21,7 @@ public class MainActivity extends ReactActivity {
   protected String getMainComponentName() {
     return "Link";
   }
+
   @Override
   protected ReactActivityDelegate createReactActivityDelegate() {
     return new ReactActivityDelegate(this, getMainComponentName()) {
@@ -28,6 +32,11 @@ public class MainActivity extends ReactActivity {
         Bundle bundle = new Bundle();
         bundle.putString("text", intent.getStringExtra(Intent.EXTRA_TEXT));
         return bundle;
+      }
+
+      @Override
+      protected ReactRootView createRootView() {
+        return new RNGestureHandlerEnabledRootView(MainActivity.this);
       }
     };
   }

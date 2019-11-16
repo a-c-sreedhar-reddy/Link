@@ -1,9 +1,20 @@
 import React, {useState} from 'react';
 import AddLink from './pages/AddLink';
 import Home from './pages/Home';
+import {createAppContainer} from 'react-navigation';
+import {createStackNavigator} from 'react-navigation-stack';
 import AsyncStorage from '@react-native-community/async-storage';
 
-function App({text}) {
+const createAppNavigator = initialRouteName =>
+  createStackNavigator(
+    {
+      Home: {screen: Home, navigationOptions: {title: 'Link'}},
+      AddLink: {screen: AddLink, navigationOptions: {title: 'Add Link'}},
+    },
+    {initialRouteName: initialRouteName || 'Home'},
+  );
+
+export default function({text}) {
   const [saved, setSaved] = useState(false);
   function save(link, title) {
     AsyncStorage.getItem('links')
@@ -18,7 +29,9 @@ function App({text}) {
       })
       .then(() => setSaved(true));
   }
-  return text && !saved ? <AddLink text={text} save={save} /> : <Home />;
-}
+  const RootStack = createAppContainer(
+    createAppNavigator(text && !saved && 'AddLink'),
+  );
 
-export default App;
+  return <RootStack screenProps={{text, save}} />;
+}
