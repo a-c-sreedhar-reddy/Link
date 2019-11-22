@@ -1,4 +1,4 @@
-package com.link;
+package com.mahilink;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -19,7 +19,7 @@ public class MainActivity extends ReactActivity {
    */
   @Override
   protected String getMainComponentName() {
-    return "Link";
+    return "MahiLink";
   }
 
   @Override

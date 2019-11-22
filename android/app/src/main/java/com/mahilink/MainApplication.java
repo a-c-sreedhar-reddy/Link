@@ -1,4 +1,4 @@
-package com.link;
+package com.mahilink;
 
 import android.app.Application;
 import android.content.Context;
