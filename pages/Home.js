@@ -27,7 +27,7 @@ function Home({navigation}) {
     AsyncStorage.setItem(
       'links',
       JSON.stringify(Array.from(links).filter((item, i) => i !== index)),
-    ).then(
+    ).then(() =>
       AsyncStorage.getItem('links')
         .then(link => {
           setLinks(JSON.parse(link));
